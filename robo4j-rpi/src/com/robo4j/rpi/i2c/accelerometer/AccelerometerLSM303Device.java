@@ -2,13 +2,18 @@ package com.robo4j.rpi.i2c.accelerometer;
 
 import java.io.IOException;
 
-
 import com.pi4j.io.i2c.I2CBus;
 import com.robo4j.rpi.geometry.Float3D;
 import com.robo4j.rpi.i2c.AbstractI2CDevice;
 import com.robo4j.rpi.i2c.ReadableDevice;
 
-public class AccelerometerDevice extends AbstractI2CDevice implements ReadableDevice<Float3D> {
+/**
+ * Abstraction for reading data from a LSM303 accelerometer, for example the one
+ * on the Adafruit IMU breakout board.
+ * 
+ * @author Marcus Hirt
+ */
+public class AccelerometerLSM303Device extends AbstractI2CDevice implements ReadableDevice<Float3D> {
 	public static final float GRAVITY_ZURICH = 9.807f;
 
 	public static final int AXIS_ENABLE_X = 1;
@@ -25,16 +30,16 @@ public class AccelerometerDevice extends AbstractI2CDevice implements ReadableDe
 
 	private final FullScale scale;
 
-	public AccelerometerDevice() throws IOException {
+	public AccelerometerLSM303Device() throws IOException {
 		this(PowerMode.NORMAL, DataRate.HZ_10, FullScale.G_2, false);
 	}
 
-	public AccelerometerDevice(PowerMode mode, DataRate rate, FullScale scale, boolean highres) throws IOException {
+	public AccelerometerLSM303Device(PowerMode mode, DataRate rate, FullScale scale, boolean highres) throws IOException {
 		this(I2CBus.BUS_1, 0x19, mode, rate, AXIS_ENABLE_ALL, scale, highres);
 	}
 
-	public AccelerometerDevice(int bus, int address, PowerMode mode, DataRate rate, int axisEnable, FullScale scale, boolean highres)
-			throws IOException {
+	public AccelerometerLSM303Device(int bus, int address, PowerMode mode, DataRate rate, int axisEnable, FullScale scale,
+			boolean highres) throws IOException {
 		super(bus, address);
 		this.scale = scale;
 		initialize(mode, rate, axisEnable, scale, highres);
@@ -64,7 +69,8 @@ public class AccelerometerDevice extends AbstractI2CDevice implements ReadableDe
 
 	}
 
-	private void initialize(PowerMode mode, DataRate rate, int axisEnable, FullScale scale, boolean highres) throws IOException {
+	private void initialize(PowerMode mode, DataRate rate, int axisEnable, FullScale scale, boolean highres)
+			throws IOException {
 		byte config = (byte) ((mode.getCtrlCode() | rate.getCtrlCode() | axisEnable) & 0xFF);
 		writeByte(CTRL_REG1_A, config);
 		byte check = (byte) readByte(CTRL_REG1_A);
@@ -78,8 +84,8 @@ public class AccelerometerDevice extends AbstractI2CDevice implements ReadableDe
 	}
 
 	public enum DataRate {
-		POWER_DOWN(0x0), HZ_1(0x10), HZ_10(0x20), HZ_25(0x30), HZ_50(0x40), HZ_100(0x50), HZ_200(0x60), HZ_400(0x70), HZ_LP_1620(0x80), HZ_N_1354_LP_5376(
-				0x81);
+		POWER_DOWN(0x0), HZ_1(0x10), HZ_10(0x20), HZ_25(0x30), HZ_50(0x40), HZ_100(0x50), HZ_200(0x60), HZ_400(
+				0x70), HZ_LP_1620(0x80), HZ_N_1354_LP_5376(0x81);
 
 		private int ctrlCode;
 

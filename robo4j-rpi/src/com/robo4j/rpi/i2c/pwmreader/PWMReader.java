@@ -23,7 +23,8 @@ import com.robo4j.rpi.i2c.AbstractI2CDevice;
 /**
  * Abstraction for reading PWM pulse lengths from a PWM reader.
  * 
- * The PWM reader is a custom built arduino nano thingy. ;)
+ * FIXME(Marcus/Dec 5, 2016): The PWM reader is custom code running on an
+ * Arduino Nano, should probably share design and c-code.
  * 
  * @author Marcus Hirt
  */
@@ -36,10 +37,10 @@ public class PWMReader extends AbstractI2CDevice {
 	public PWMReader(int bus, int address) throws IOException {
 		super(bus, address);
 	}
-	
+
 	/**
 	 * @return the pulse length in ms
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public double readPulse(int channel) throws IOException {
 		i2cDevice.write((byte) channel);
@@ -47,10 +48,10 @@ public class PWMReader extends AbstractI2CDevice {
 		int valueInMicros = readU2();
 		return valueInMicros / 1000.0;
 	}
-	
+
 	private int readU2() throws IOException {
-		byte [] result = new byte[2];
-		i2cDevice.read(result, 0, 2);		
+		byte[] result = new byte[2];
+		i2cDevice.read(result, 0, 2);
 		return (result[0] << 8) + (result[1] & 0xff);
 	}
 }

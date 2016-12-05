@@ -1,10 +1,14 @@
-package com.robo4j.rpi.i2c.accelerometer;
+package com.robo4j.rpi.i2c;
 
 import java.io.IOException;
 
 import com.robo4j.rpi.geometry.Float3D;
-import com.robo4j.rpi.i2c.ReadableDevice;
 
+/**
+ * Wrapper class for readable devices returning Float3D, allowing for calibration.
+ * 
+ * @author Marcus Hirt
+ */
 public class CalibratedFloat3DDevice implements ReadableDevice<Float3D> {
 	private final Float3D centerOffsets; 
 	private final Float3D rangeMultipliers;

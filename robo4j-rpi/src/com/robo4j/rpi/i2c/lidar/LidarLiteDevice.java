@@ -22,11 +22,11 @@ import com.pi4j.io.i2c.I2CBus;
 import com.robo4j.rpi.i2c.AbstractI2CDevice;
 
 /**
- * Abstraction for the Garmin/PulsedLight LidarLite.
+ * Abstraction for the Garmin/PulsedLight LidarLite device.
  * 
  * @author Marcus Hirt
  */
-public final class LidarDevice extends AbstractI2CDevice {
+public final class LidarLiteDevice extends AbstractI2CDevice {
 	private static final int REGISTER_COMMAND = 0x0;
 	private static final int REGISTER_RESULT = 0x8f;
 	private static final byte COMMAND_ACQUIRE_RANGE = 0x4;
@@ -37,7 +37,7 @@ public final class LidarDevice extends AbstractI2CDevice {
 	 * @throws IOException
 	 *             if there was communication problem
 	 */
-	public LidarDevice() throws IOException {
+	public LidarLiteDevice() throws IOException {
 		// 0x62 is the hardwired address of the Lidar-Lite Device
 		super(I2CBus.BUS_1, 0x62);
 	}
@@ -55,7 +55,7 @@ public final class LidarDevice extends AbstractI2CDevice {
 	 * @throws IOException
 	 *             if there was communication problem
 	 */
-	public LidarDevice(int bus, int address) throws IOException {
+	public LidarLiteDevice(int bus, int address) throws IOException {
 		super(bus, address);
 	}
 

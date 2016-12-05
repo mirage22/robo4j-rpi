@@ -25,7 +25,7 @@ import com.robo4j.rpi.geometry.Float3D;
  * 
  * @author Marcus Hirt
  */
-public class MagnetometerTest {
+public class MagnetometerLSM303Test {
 	// FIXME(Marcus/Dec 5, 2016): Verify that this one works.
 	public static void main(String[] args) throws IOException, InterruptedException {
 		MagnetometerLSM303Device device = new MagnetometerLSM303Device();

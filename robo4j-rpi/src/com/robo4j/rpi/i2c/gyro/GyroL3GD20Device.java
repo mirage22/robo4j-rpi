@@ -29,7 +29,7 @@ import com.robo4j.rpi.i2c.ReadableDevice;
  * 
  * @author Marcus Hirt
  */
-public class GyroDevice extends AbstractI2CDevice implements
+public class GyroL3GD20Device extends AbstractI2CDevice implements
 		ReadableDevice<Float3D> {
 
 	private final Sensitivity sensitivity;
@@ -67,11 +67,11 @@ public class GyroDevice extends AbstractI2CDevice implements
 	private final int L3GD20_ID = 0xD4;
 	private final int L3GD20H_ID = 0xD7;
 
-	public GyroDevice(Sensitivity sensitivity) throws IOException {
+	public GyroL3GD20Device(Sensitivity sensitivity) throws IOException {
 		this(I2CBus.BUS_1, 0x6b, sensitivity, true);
 	}
 
-	public GyroDevice(int bus, int address, Sensitivity sensitivity, boolean enableHighPassFilter)
+	public GyroL3GD20Device(int bus, int address, Sensitivity sensitivity, boolean enableHighPassFilter)
 			throws IOException {
 		super(bus, address);
 		this.sensitivity = sensitivity;

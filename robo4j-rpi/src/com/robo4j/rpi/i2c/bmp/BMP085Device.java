@@ -25,11 +25,11 @@ import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
 import com.robo4j.rpi.i2c.AbstractI2CDevice;
 
 /**
- * Code to talk to a Bosch digital barometric pressure sensor (BMP085).
+ * Abstraction to read a Bosch digital barometric pressure sensor (BMP085/BMP180).
  * 
  * @author Marcus Hirt
  */
-public final class BMPDevice extends AbstractI2CDevice {
+public final class BMP085Device extends AbstractI2CDevice {
 	private static final int PRESSURE_SEA_LEVEL = 101325;
 	private static final double POW_FACT = 1.0 / 5.225;
 	// Calibration data
@@ -64,7 +64,7 @@ public final class BMPDevice extends AbstractI2CDevice {
 	 * @throws IOException
 	 *             if there was communication problem
 	 */
-	public BMPDevice(OperatingMode mode) throws IOException {
+	public BMP085Device(OperatingMode mode) throws IOException {
 		// 0x77 is the default address used by the AdaFruit BMP board.
 		this(I2CBus.BUS_1, 0x77, mode);
 	}
@@ -83,7 +83,7 @@ public final class BMPDevice extends AbstractI2CDevice {
 	 *             if there was communication problem
 	 * @throws UnsupportedBusNumberException 
 	 */
-	public BMPDevice(int bus, int address, OperatingMode mode) throws IOException {
+	public BMP085Device(int bus, int address, OperatingMode mode) throws IOException {
 		super(bus, address);
 		this.mode = mode;
 		readCalibrationData();

@@ -39,7 +39,7 @@ import org.junit.Test;
 import com.robo4j.rpi.serial.gps.PositionEvent.FixQuality;
 
 /**
- * Unit tests that was used during development.
+ * Unit tests.
  * 
  * @author Marcus Hirt
  */
@@ -62,7 +62,7 @@ public class ParseTests {
 		assertEquals("Could not determine fix quality", pe.getFixQuality(),
 				FixQuality.GPS);
 		assertEquals(545.4, pe.getAltitude(), 0.01);
-		assertEquals(46.9, pe.getElipsoidAltitude(), 0.01);
+		assertEquals(545.4 + 46.9, pe.getElipsoidAltitude(), 0.01);
 		assertEquals(8, pe.getNumberOfSatellites());
 	}
 }

@@ -26,9 +26,9 @@ import com.robo4j.rpi.i2c.ReadableDevice;
  * 
  * @author Marcus Hirt
  */
-public class AccelerometerTest {
+public class AccelerometerLSM303Test {
 	public static void main(String[] args) throws IOException, InterruptedException {
-		ReadableDevice<Float3D> device = new AccelerometerDevice();		
+		ReadableDevice<Float3D> device = new AccelerometerLSM303Device();		
 		getReading(device, "Place the device in the position(s) you want to measure");
 	}
 
